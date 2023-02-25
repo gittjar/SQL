@@ -27,9 +27,6 @@ create user 'pizzadude'@'localhost' identified by 'pizzaisgod';
 
 grant all privileges on pizzakanta.* to 'pizzadude'@'localhost';
 
-
-
-
 insert into pizza values(1,'Margarita');
 insert into pizza values(2,'Special Opera');
 insert into pizza values(3,'Kebab Tulinen');
@@ -48,7 +45,6 @@ insert into raaka_aine values(10,'kinkku');
 
 select * from pizza;
 select * from raaka_aine;
-
 
                                     -- p  a                       
 insert into pizzan_raaka_aineet values( 1, 1);
