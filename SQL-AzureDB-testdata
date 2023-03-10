@@ -1,4 +1,4 @@
--- SQL Server Azure commands
+-- SQL Server Azure commands :: feed your database with companydata!
 -- RUN THESE >
 
 create table companytaulu(
@@ -20,3 +20,5 @@ insert into companytaulu values(7,'Burger King','Fast food restaurant',1954,'Mia
 insert into companytaulu values(8,'UPM','Paper, Pulp and Bioenergy',1996,'Helsinki','FIN');
 insert into companytaulu values(9,'Kone','Elevators and automatic doors',1910,'Espoo','FIN');
 insert into companytaulu values(10,'SAAB','Aerospace and defence',1937,'Stockholm','SWE');
+
+select * from companytaulu;
