@@ -30,7 +30,7 @@ grant all privileges on pizzakanta.* to 'pizzadude'@'localhost';
 insert into pizza values(1,'Margarita');
 insert into pizza values(2,'Special Opera');
 insert into pizza values(3,'Kebab Tulinen');
-insert into pizza values(4,'Sixtus');
+insert into pizza values(4,'Jarnos Favpizza');
 
 insert into raaka_aine values(1,'jauheliha');
 insert into raaka_aine values(2,'pepperoni');
