@@ -22,3 +22,51 @@ insert into companytaulu values(9,'Kone','Elevators and automatic doors',1910,'E
 insert into companytaulu values(10,'SAAB','Aerospace and defence',1937,'Stockholm','SWE');
 
 select * from companytaulu;
+
+
+-- CREATE LOGIN
+-- Commands >
+--
+USE master;
+CREATE LOGIN UserName1 WITH password='VaikeaSalasana2';
+GO
+
+-- CREATE USER FOR TESTIDB
+-- USE This user for connectionstring
+-- Datawriter can insert, delete and update database data
+-- Server=tcp:yourdatabasenamehere.database.windows.net,1433;Initial Catalog=testiDB;Persist Security Info=False;User ID=UserName1;Password=VaikeaSalasana2;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+-- Commands >
+-- 
+Use testiDB;
+CREATE USER UserName1 from LOGIN UserName1;
+GO
+EXEC sp_addrolemember 'db_datawriter', 'UserName1';
+GO
+
+-- drop user UserName1;
+
+-- Select users and see their priviledges etc.
+--
+select name as username,
+       create_date,
+       modify_date,
+       type_desc as type,
+       authentication_type_desc as authentication_type
+from sys.database_principals
+where type not in ('A', 'G', 'R', 'X')
+       and sid is not null
+order by username;
+
+--
+-- 
+
+SELECT    roles.principal_id                            AS RolePrincipalID
+  ,    roles.name                                    AS RolePrincipalName
+  ,    database_role_members.member_principal_id    AS MemberPrincipalID
+  ,    members.name                                AS MemberPrincipalName
+ FROM sys.database_role_members AS database_role_members  
+ JOIN sys.database_principals AS roles  
+  ON database_role_members.role_principal_id = roles.principal_id  
+ JOIN sys.database_principals AS members  
+  ON database_role_members.member_principal_id = members.principal_id;  
+ GO
