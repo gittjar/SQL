@@ -1,4 +1,6 @@
 -- creates database
+-- works in MariaDb
+--
 drop database if exists yrityskanta;
 create database yrityskanta;
 
