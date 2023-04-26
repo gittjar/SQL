@@ -1,4 +1,4 @@
---  AZURE SQL
+--  Azure SQL
 --  CREATING JARNOS RECORDS DATABASE
 --
 
@@ -10,39 +10,32 @@ Go
 
 Use JarnosRecordsDB;
 
-CREATE TABLE Records (
+CREATE TABLE RECORDS (
     Id INT IDENTITY PRIMARY KEY NOT NULL,
     ArtistName NVARCHAR(150),
     RecordName NVARCHAR(250),
     Published smalldatetime,
-    Genre NVARCHAR(50),
-    Label NVARCHAR(150),
     RecordImage VARBINARY (max),
     ExtraInformation NVARCHAR
 )
 Go
 
 -- Create subtables
+-- GENRE
 
--- Genre
-CREATE TABLE Genre (
-Id INT IDENTITY PRIMARY KEY NOT NULL,
-GenreName NVARCHAR(50)
-)
-ALTER TABLE Records ADD GenreId INT
-ALTER TABLE Records ADD CONSTRAINT FK_Genre
-FOREIGN KEY (GenreId)
-REFERENCES Genre(Id)
+CREATE TABLE GENRES (
+   GID INT NOT NULL,
+   GenreName VARCHAR (50) NOT NULL,
+   RECORD_ID INT NOT NULL
+);
 
--- ArtistName
-CREATE TABLE ArtistName (
-Id INT IDENTITY PRIMARY KEY NOT NULL,
-ArtistName NVARCHAR(150)
+-- LABEL
+
+CREATE TABLE LABELS (
+    LID INT NOT NULL,
+    LabelName VARCHAR (100) NOT NULL,
+    RECORD_ID INT NOT NULL
 )
-ALTER TABLE Records ADD ArtistNameId INT
-ALTER TABLE Records ADD CONSTRAINT FK_ArtistName
-FOREIGN KEY (ArtistNameId)
-REFERENCES ArtistName(Id)
 
 -- show tables
 select schema_name(t.schema_id) as schema_name,
@@ -52,3 +45,16 @@ select schema_name(t.schema_id) as schema_name,
 from sys.tables t
 order by schema_name,
          table_name;
+
+-- Adds Metallica album 
+INSERT INTO Records (ArtistName, RecordName, Published) VALUES ('Metallica', 'Black Album', '08-12-1991');
+
+Insert Into Genres (GID, GenreName, RECORD_ID) values (101, 'Heavy Metal', 1);
+INSERT INTO Labels (LID, LabelName, RECORD_ID) VALUES (201, 'Elektra Records', 1);
+
+-- inner join multiple tables
+select Id,ArtistName,RecordName,GenreName,LabelName from records inner join
+genres on records.Id = genres.RECORD_ID inner join labels on
+records.Id = labels.RECORD_ID;
+
+-- drop database JarnosRecordsDB;
