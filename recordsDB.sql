@@ -17,7 +17,7 @@ CREATE TABLE RECORDS (
     Published smalldatetime,
     RecordImage VARBINARY (max),
     ExtraInformation NVARCHAR
-)
+);
 Go
 
 -- Create subtables
@@ -35,7 +35,7 @@ CREATE TABLE LABELS (
     LID INT NOT NULL,
     LabelName VARCHAR (100) NOT NULL,
     RECORD_ID INT NOT NULL
-)
+);
 
 -- show tables
 select schema_name(t.schema_id) as schema_name,
