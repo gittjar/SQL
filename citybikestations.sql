@@ -9,7 +9,7 @@ CREATE TABLE citybikestations (
     Kaupunki varchar(100),
     Stad varchar(100),
     Operaattor varchar(100),
-    Kapasiteet int(3),
+    Kapasiteet tinyint,
     x decimal(8,6),
     y decimal(9,6)
 );
