@@ -1,3 +1,6 @@
+-- AZURE SQL
+-- CITYBIKE
+
 CREATE TABLE citybikestations (
     FID int,
     ID int,
