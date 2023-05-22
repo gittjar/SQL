@@ -4,6 +4,9 @@
 -- poista kaikki matkat joiden pituus 0m
 delete from [BiketripsMay2021] where Covered_distance_m='0';
 
+-- poista kaikki matkat joiden pituus 0m - 250m
+delete from [BiketripsMay2021] where Covered_distance_m between 0 and 250;
+
 -- vaihda kolumnin covered distance tyypiksi decimal
 alter table BiketripsMay2021 alter column Covered_distance_m decimal;
 GO
