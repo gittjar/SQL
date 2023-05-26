@@ -16,3 +16,8 @@ CREATE TABLE citybikestations (
     x decimal(8,6),
     y decimal(9,6)
 );
+
+-- Set station to Helsinki where rest of stations are NULL
+-- ESPOO OK
+update Station set Kaupunki='Helsinki' where Kaupunki IS NULL;
+update Station set Operaattor='Citybike Finland' where Operaattor IS NULL;
