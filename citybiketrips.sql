@@ -1,24 +1,25 @@
--- tehdään taulu pienemmällä datamäärällä
--- May 2021 matkat ja joista 1000 ekaa matkaa kehitystä varten
+-- lets operating bit smaller database
+-- May 2021 trips take first 100000 rows
 
--- poista kaikki matkat joiden pituus 0m
-delete from [BiketripsMay2021] where Covered_distance_m='0';
+-- change column Covered_distance_m to decimal
+alter table BiketripsMay2021 alter column Covered_distance_m decimal;
 
--- poista kaikki matkat joiden pituus 0m - 250m
+-- delete all distances between 0m - 250m
 delete from [BiketripsMay2021] where Covered_distance_m between 0 and 250;
 
--- vaihda kolumnin covered distance tyypiksi decimal
-alter table BiketripsMay2021 alter column Covered_distance_m decimal;
-GO
+-- delete all Duration_sec under 180s = 3min
+delete from [BiketripsMay2021] where Duration_sec between 0 and 180;
 
--- testikysely
+-- testquery
 select duration_sec from BiketripsMay2021 where return_station_name='Pasilan asema';
 
--- Pienennetään kehitystä varten taulukko
--- Otetaan 1000 ekaa riviä, muut deletoidaan
+-- Take first 100000 rows
 DELETE FROM BiketripsMay2021
 WHERE Departure NOT IN (
   SELECT TOP (1000) WITH TIES Departure
   FROM BiketripsMay2021
   ORDER BY Departure ASC
 )
+
+-- make unique ID for all trips by growing ID number
+ALTER TABLE dbo.BiketripsMay2021 ADD ID INT IDENTITY(1,1) NOT NULL;
