@@ -16,7 +16,7 @@ select duration_sec from BiketripsMay2021 where return_station_name='Pasilan ase
 -- Take first 100000 rows
 DELETE FROM BiketripsMay2021
 WHERE Departure NOT IN (
-  SELECT TOP (1000) WITH TIES Departure
+  SELECT TOP (100000) WITH TIES Departure
   FROM BiketripsMay2021
   ORDER BY Departure ASC
 )
